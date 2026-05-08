@@ -3,8 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   ChevronLeft, Edit3, Check, Mail, Phone,
-  DollarSign, Globe, ShieldCheck,
-  Building2, Camera, Info, Tag, PlusCircle, History, Activity
+  Globe, ShieldCheck, Building2, Tag,
+  PlusCircle, User, Briefcase, Calendar, MapPin
 } from "lucide-react";
 
 import ConfirmSaveModal from "../components/common/ConfirmSaveModel";
@@ -19,11 +19,14 @@ export default function LeadDetails() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const statusOptions = ["New", "Contacted", "Qualified", "Proposal Sent", "Won", "Lost"];
+
+  // Logic remains unchanged
   useEffect(() => {
     const fetchLead = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/leads/${id}`)
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/leads/${id}`);
         setLead(res.data);
         setOriginalLead(res.data);
       } catch (err) {
@@ -46,7 +49,7 @@ export default function LeadDetails() {
 
   const confirmSave = async () => {
     try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/api/leads/${id}`, lead)
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/leads/${id}`, lead);
       setOriginalLead(lead);
       setIsEditing(false);
       setShowConfirm(false);
@@ -55,192 +58,179 @@ export default function LeadDetails() {
     }
   };
 
-  if (loading) return (
-    <div className="h-screen flex items-center justify-center bg-slate-50 font-bold text-slate-400">
-      Initializing Secure Profile...
-    </div>
-  );
-  
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-white">
+        <div className="w-10 h-10 border-4 border-[#00172f] border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+
   if (!lead) return null;
 
   return (
-    <div className="h-screen overflow-hidden bg-[#f8fafc] flex flex-col font-sans text-slate-900">
+    <div className="min-h-screen bg-[#f4f7f9] flex flex-col text-slate-800">
       
-      {/* TOP NAV */}
-      <nav className="bg-slate-900 text-white px-6 py-3 flex items-center justify-between shadow-lg z-20">
-        <button 
-          onClick={() => navigate(-1)} 
-          className="flex items-center gap-2 hover:bg-white/10 px-3 py-1.5 rounded-lg transition-all"
-        >
-          <ChevronLeft size={18} /> 
-          <span className="font-bold text-xs uppercase tracking-widest">Back to Pipeline</span>
-        </button>
-        
-        <div className="flex gap-3">
-          {/* ✅ NAVIGATE TO NOTES */}
+      {/* BRANDED HEADER */}
+      <div className="bg-[#00172f] text-white pt-8 pb-24 px-8">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
           <button 
-            onClick={() => navigate(`/leads/${id}/notes`)}
-            className="bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-lg flex items-center gap-2 text-xs font-bold transition-all border border-white/10"
+            onClick={() => navigate(-1)} 
+            className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
           >
-            <PlusCircle size={16} /> View Notes
+            <ChevronLeft size={20} /> <span className="text-sm font-medium">Back to CRM</span>
           </button>
-
-          {!isEditing ? (
-            <button 
-              onClick={() => setIsEditing(true)} 
-              className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-1.5 rounded-lg flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all shadow-md shadow-blue-900/20"
-            >
-              <Edit3 size={14} /> Edit Mode
-            </button>
-          ) : (
-            <div className="flex gap-2 animate-in slide-in-from-right-2 duration-200">
-              <button 
-                onClick={handleCancel} 
-                className="bg-slate-700 hover:bg-slate-600 px-4 py-1.5 rounded-lg text-xs font-bold text-white transition-all"
+          
+          <div className="flex gap-3">
+            {!isEditing ? (
+              <button
+                onClick={() => setIsEditing(true)}
+                className="bg-white/10 hover:bg-white/20 border border-white/20 px-5 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold transition-all"
               >
-                Cancel
+                <Edit3 size={16} /> Edit Profile
               </button>
-              <button 
-                onClick={() => setShowConfirm(true)} 
-                className="bg-emerald-500 hover:bg-emerald-400 px-4 py-1.5 rounded-lg text-xs font-black uppercase flex items-center gap-2 text-white shadow-md shadow-emerald-900/20 transition-all"
-              >
-                <Check size={14} /> Commit Changes
-              </button>
-            </div>
-          )}
-        </div>
-      </nav>
-
-      {/* HEADER SECTION */}
-      <div className="bg-white border-b border-slate-200 shadow-sm z-10">
-        <div className="max-w-7xl mx-auto px-8 py-8 flex items-center gap-10">
-          <div className="relative group">
-            <div className="w-24 h-24 rounded-[2rem] bg-gradient-to-br from-slate-800 to-slate-950 border-4 border-white shadow-2xl flex items-center justify-center text-white text-4xl font-black italic transform transition-transform group-hover:rotate-3">
-              {lead.name?.charAt(0)}
-            </div>
-            {isEditing && (
-              <div className="absolute -bottom-1 -right-1 bg-blue-600 text-white p-2.5 rounded-xl border-4 border-white cursor-pointer shadow-lg hover:scale-110 transition-all">
-                <Camera size={16} />
+            ) : (
+              <div className="flex gap-2">
+                <button onClick={handleCancel} className="px-4 py-2 text-sm font-semibold text-white/70 hover:text-white">
+                  Cancel
+                </button>
+                <button
+                  onClick={() => setShowConfirm(true)}
+                  className="bg-emerald-500 hover:bg-emerald-400 text-white px-5 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold transition-all shadow-lg shadow-emerald-900/20"
+                >
+                  <Check size={16} /> Save Changes
+                </button>
               </div>
             )}
-          </div>
-
-          <div className="flex-grow space-y-3">
-            {!isEditing ? (
-              <>
-                <h1 className="text-4xl font-black text-slate-900 tracking-tight">{lead.name}</h1>
-                <div className="flex items-center gap-4 text-slate-500 font-bold">
-                  <span className="flex items-center gap-2 bg-slate-100 text-slate-700 px-4 py-1 rounded-full text-sm">
-                    <Building2 size={16} className="text-slate-400" /> {lead.company}
-                  </span>
-                  <span className={`flex items-center gap-2 px-4 py-1 rounded-full text-sm uppercase tracking-wider font-black ${
-                    lead.status === 'Won' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-50 text-blue-700'
-                  }`}>
-                    <Tag size={16} /> {lead.status}
-                  </span>
-                </div>
-              </>
-            ) : (
-              <div className="flex flex-col gap-3 max-w-md">
-                <input 
-                  name="name" 
-                  value={lead.name} 
-                  onChange={handleChange} 
-                  className="text-2xl font-bold border-b-2 border-blue-500 outline-none bg-blue-50/40 px-3 py-1 rounded-t-xl" 
-                />
-                <input 
-                  name="company" 
-                  value={lead.company} 
-                  onChange={handleChange} 
-                  className="text-sm font-semibold border-b border-slate-200 outline-none px-3 py-1 text-slate-500" 
-                />
-              </div >
-            )}
-          </div>
-
-          <div className="hidden lg:block text-right border-l pl-10 border-slate-100">
-             <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Contract Valuation</p>
-             <p className="text-4xl font-black text-slate-900">
-               <span className="text-emerald-600 font-medium mr-1">$</span>
-               {Number(lead.value || 0).toLocaleString()}
-             </p>
           </div>
         </div>
       </div>
 
       {/* MAIN CONTENT AREA */}
-      <main className="flex-grow p-8 overflow-y-auto bg-[#f8fafc]">
-        <div className="max-w-7xl mx-auto grid grid-cols-12 gap-8">
+      <main className="max-w-6xl mx-auto w-full px-8 -mt-16 pb-12">
+        <div className="grid grid-cols-12 gap-8">
           
-          {/* COLUMN 1: CORE DATA */}
-          <section className="col-span-12 md:col-span-5 space-y-6">
-            <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 flex flex-col gap-8">
-              <div className="flex items-center gap-2 font-black text-[11px] uppercase tracking-[0.25em] text-slate-400">
-                <Info size={14} className="text-blue-600" /> Core Intelligence
-              </div>
-              
-              <div className="space-y-6">
-                <AboutField label="Direct Email" name="email" value={lead.email} onChange={handleChange} isEditing={isEditing} icon={<Mail size={16}/>} />
-                <AboutField label="Primary Contact" name="phone" value={lead.phone} onChange={handleChange} isEditing={isEditing} icon={<Phone size={16}/>} />
-                <AboutField label="Lead Source" name="source" value={lead.source} onChange={handleChange} isEditing={isEditing} icon={<Globe size={16}/>} />
-                <AboutField label="Relationship Manager" name="assigned" value={lead.assigned} onChange={handleChange} isEditing={isEditing} icon={<ShieldCheck size={16}/>} />
-              </div>
-            </div>
-          </section>
-
-          {/* COLUMN 2: ACTIVITY & METRICS */}
-          <section className="col-span-12 md:col-span-7 space-y-6">
-            <div className="grid grid-cols-2 gap-6">
-               <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-center">
-                  <div className="p-2.5 bg-blue-50 text-blue-600 rounded-2xl w-fit mb-4">
-                    <History size={22} />
-                  </div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Last Modified</p>
-                  <p className="font-bold text-slate-800 mt-1">{lead.updated_at || "Just now"}</p>
-               </div>
-               
-               <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-center">
-                  <div className="p-2.5 bg-slate-100 text-slate-600 rounded-2xl w-fit mb-4">
-                    <Activity size={22} />
-                  </div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">System Reference</p>
-                  <p className="font-mono font-bold text-slate-700 mt-1 text-xs">#{id?.slice(-8).toUpperCase()}</p>
-               </div>
-            </div>
-
-            {/* REVENUE SECTION */}
-            <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
-              <div className="flex items-center justify-between mb-6">
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] italic">
-                  Deal Valuation Profile
-                </label>
-                {!isEditing && <span className="bg-emerald-50 text-emerald-700 text-[10px] font-black px-3 py-1 rounded-lg">LIVE QUOTE</span>}
-              </div>
-              
-              <div className={`flex items-center p-6 rounded-2xl border-2 transition-all duration-300 ${isEditing ? 'border-blue-500 bg-blue-50/30' : 'border-slate-50 bg-slate-50/50'}`}>
-                <DollarSign size={32} className={`${isEditing ? 'text-blue-600' : 'text-slate-400'} font-bold transition-colors`} />
-                <input 
-                  name="value" 
-                  type="text"
-                  value={lead.value} 
-                  onChange={handleChange} 
-                  disabled={!isEditing} 
-                  className="bg-transparent w-full font-black text-4xl outline-none px-4 text-slate-800 disabled:opacity-100 placeholder-slate-300" 
-                  placeholder="0.00"
-                />
-              </div>
-              
-              <div className="mt-6 flex items-start gap-3 bg-blue-50/50 p-4 rounded-2xl border border-blue-100/50">
-                <Info size={18} className="text-blue-500 mt-0.5 shrink-0" />
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  The projected revenue value is calculated based on current pipeline settings. 
-                  Update this figure as negotiations progress to maintain accurate forecasting.
+          {/* LEFT COLUMN: PROFILE CARD */}
+          <div className="col-span-12 lg:col-span-4 space-y-6">
+            <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/60 overflow-hidden border border-slate-100">
+              <div className="p-8 flex flex-col items-center text-center">
+                <div className="w-32 h-32 bg-[#00172f] rounded-full flex items-center justify-center text-white text-5xl font-bold border-4 border-white shadow-lg mb-4">
+                  {lead.name?.charAt(0)}
+                </div>
+                
+                {isEditing ? (
+                  <input
+                    name="name"
+                    value={lead.name}
+                    onChange={handleChange}
+                    className="text-2xl font-bold text-center border-b border-blue-500 outline-none w-full mb-2"
+                  />
+                ) : (
+                  <h2 className="text-2xl font-bold text-[#00172f]">{lead.name}</h2>
+                )}
+                
+                <p className="text-slate-500 font-medium flex items-center gap-2 mb-6">
+                  <Briefcase size={16} /> {lead.company}
                 </p>
+
+                <div className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${
+                  lead.status === "Won" ? "bg-emerald-100 text-emerald-700" : 
+                  lead.status === "Lost" ? "bg-red-100 text-red-700" : 
+                  "bg-slate-100 text-[#00172f]"
+                }`}>
+                  {lead.status}
+                </div>
+              </div>
+
+              <div className="border-t border-slate-50 p-6 space-y-4">
+                <div className="flex items-center gap-4 text-sm">
+                   <div className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center text-[#00172f]">
+                      <Mail size={18} />
+                   </div>
+                   <div className="flex-1 overflow-hidden">
+                      <p className="text-[10px] uppercase font-bold text-slate-400">Email</p>
+                      <p className="font-semibold truncate">{lead.email}</p>
+                   </div>
+                </div>
+                <div className="flex items-center gap-4 text-sm">
+                   <div className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center text-[#00172f]">
+                      <Phone size={18} />
+                   </div>
+                   <div>
+                      <p className="text-[10px] uppercase font-bold text-slate-400">Phone</p>
+                      <p className="font-semibold">{lead.phone}</p>
+                   </div>
+                </div>
+              </div>
+
+              <div className="p-4 bg-slate-50/50">
+                <button 
+                   onClick={() => navigate(`/leads/${id}/notes`)}
+                   className="w-full bg-white border border-slate-200 hover:border-[#00172f] text-[#00172f] py-3 rounded-xl flex items-center justify-center gap-2 text-sm font-bold transition-all shadow-sm"
+                >
+                   <PlusCircle size={18} /> Activity Notes
+                </button>
               </div>
             </div>
-          </section>
+          </div>
 
+          {/* RIGHT COLUMN: DETAILS & META */}
+          <div className="col-span-12 lg:col-span-8 space-y-6">
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+              <div className="px-8 py-6 border-b border-slate-100">
+                <h3 className="font-bold text-[#00172f] flex items-center gap-2">
+                  <User size={18} className="text-slate-400" /> Lead Information
+                </h3>
+              </div>
+              
+              <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <AboutField label="Lead Source" name="source" value={lead.source} onChange={handleChange} isEditing={isEditing} icon={<Globe size={16}/>} />
+                <AboutField label="Assigned Rep" name="assigned" value={lead.assigned} onChange={handleChange} isEditing={isEditing} icon={<ShieldCheck size={16}/>} />
+                
+                {isEditing && (
+                  <div className="col-span-2">
+                    <label className="text-[11px] font-bold text-slate-400 uppercase mb-2 block tracking-wider">Pipeline Status</label>
+                    <select
+                      name="status"
+                      value={lead.status}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-xl bg-white focus:ring-2 focus:ring-[#00172f] outline-none"
+                    >
+                      {statusOptions.map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* SYSTEM INFO TABLE */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+              <h3 className="font-bold text-[#00172f] mb-6">Engagement Metadata</h3>
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Creation Date</p>
+                  <div className="flex items-center gap-2 text-slate-700">
+                    <Calendar size={16} className="text-slate-300" />
+                    <span className="font-medium text-sm">
+                      {lead.created_at ? new Date(lead.created_at).toLocaleDateString() : "N/A"}
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Last Update</p>
+                  <div className="flex items-center gap-2 text-slate-700">
+                    <Calendar size={16} className="text-slate-300" />
+                    <span className="font-medium text-sm">
+                      {lead.updated_at ? new Date(lead.updated_at).toLocaleDateString() : "N/A"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        
       </main>
 
       <ConfirmSaveModal
@@ -252,13 +242,10 @@ export default function LeadDetails() {
   );
 }
 
-/** 
- * REUSABLE COMPONENT FOR DATA FIELDS
- */
 function AboutField({ label, name, value, onChange, isEditing, icon }) {
   return (
-    <div className="flex flex-col gap-2 group">
-      <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2 group-hover:text-blue-600 transition-colors duration-300">
+    <div className="flex flex-col gap-2">
+      <label className="flex items-center gap-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
         {icon} {label}
       </label>
       <input
@@ -266,11 +253,11 @@ function AboutField({ label, name, value, onChange, isEditing, icon }) {
         value={value || ""}
         onChange={onChange}
         disabled={!isEditing}
-        className={`w-full px-4 py-3 text-sm font-bold transition-all outline-none border-b-2 rounded-t-xl ${
-          isEditing 
-            ? 'border-blue-500 bg-blue-50/40 text-slate-900' 
-            : 'border-slate-50 bg-transparent text-slate-700'
-        }`}
+        className={`px-4 py-3 rounded-xl text-sm transition-all border
+          ${isEditing 
+            ? "border-blue-200 bg-white ring-2 ring-blue-50" 
+            : "border-transparent bg-slate-50 text-slate-600 font-medium"
+          }`}
       />
     </div>
   );

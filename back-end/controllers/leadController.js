@@ -1,39 +1,41 @@
 const pool = require("../config/db");
 const { createLead } = require("../models/leadModel");
 
-//Add a new lead to the database leads table
+// Add Lead
 const addLead = async (req, res) => {
   try {
-    const lead = await createLead(req.body);
+    const now = new Date().toISOString(); // ✅ TEXT timestamp
 
-    console.log("✅ Lead created:", lead);
+    const leadData = {
+      ...req.body,
+      created_at: now,
+      updated_at: now,
+    };
+
+    const lead = await createLead(leadData);
 
     res.status(201).json(lead);
 
   } catch (error) {
     console.log("❌ Controller Error:", error.message);
-
-    res.status(500).json({
-      error: error.message,
-    });
+    res.status(500).json({ error: error.message });
   }
 };
 
-//Get all leads from the database leads table
+// Get All Leads
 const getLeads = async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM leads ORDER BY created_at DESC");
+    const result = await pool.query(
+      "SELECT * FROM leads ORDER BY created_at DESC"
+    );
     res.status(200).json(result.rows);
   } catch (error) {
-    console.log("❌ Controller Error:", error.message);
-    res.status(500).json({
-      error: error.message,
-    });
+    console.log(error);
+    res.status(500).json({ error: error.message });
   }
 };
 
-//Get a single lead by id from the database leads table
-// GET SINGLE LEAD BY ID
+// Get Lead By ID
 const getLeadById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -48,14 +50,13 @@ const getLeadById = async (req, res) => {
     }
 
     res.json(result.rows[0]);
+
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-//Update a lead by id from the database leads table
-
+// Update Lead (UPDATED FOR TEXT TIMESTAMPS)
 const updateLead = async (req, res) => {
   try {
     const { id } = req.params;
@@ -71,12 +72,20 @@ const updateLead = async (req, res) => {
       value,
     } = req.body;
 
+    const updatedAt = new Date().toISOString(); // ✅ TEXT FORMAT
+
     const result = await pool.query(
       `UPDATE leads 
-       SET name=$1, company=$2, email=$3, phone=$4,
-           source=$5, assigned=$6, status=$7, value=$8,
-           updated_at=CURRENT_TIMESTAMP
-       WHERE id=$9
+       SET name=$1,
+           company=$2,
+           email=$3,
+           phone=$4,
+           source=$5,
+           assigned=$6,
+           status=$7,
+           value=$8,
+           updated_at=$9
+       WHERE id=$10
        RETURNING *`,
       [
         name,
@@ -87,18 +96,24 @@ const updateLead = async (req, res) => {
         assigned,
         status,
         value,
+        updatedAt,
         id,
       ]
     );
 
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Lead not found" });
+    }
+
     res.json(result.rows[0]);
+
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Update failed" });
   }
 };
 
-//Delete a lead by id from the database leads table
+// Delete Lead
 const deleteLead = async (req, res) => {
   try {
     const { id } = req.params;
@@ -113,15 +128,16 @@ const deleteLead = async (req, res) => {
     }
 
     res.json({ message: "Lead deleted successfully" });
+
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Delete failed" });
   }
 };
 
-
-module.exports = { addLead, getLeads, getLeadById, updateLead, deleteLead };
-
-
-
-
+module.exports = {
+  addLead,
+  getLeads,
+  getLeadById,
+  updateLead,
+  deleteLead,
+};

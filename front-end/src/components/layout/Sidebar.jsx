@@ -14,10 +14,10 @@ import { NavLink } from "react-router-dom";
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <LayoutDashboard size={20} /> },
-    { name: "Leads", path: "/leads", icon: <Users size={20} /> },
-    { name: "Customers", path: "/customers", icon: <Users size={20} /> },
-    { name: "Projects", path: "/projects", icon: <Briefcase size={20} /> },
-    { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
+    { name: "Lead Management", path: "/leads", icon: <Users size={20} /> },
+    // { name: "Customers", path: "/customers", icon: <Users size={20} /> },
+    // { name: "Projects", path: "/projects", icon: <Briefcase size={20} /> },
+    // { name: "Settings", path: "/settings", icon: <Settings size={20} /> },
   ];
 
   return (
@@ -40,7 +40,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <div className="h-24 flex items-center px-8 mb-4">
           <div className="flex items-center gap-3 group cursor-pointer">
             {/* Logo Container */}
-            <div className="w-10 h-10 flex items-center justify-center bg-white/5 rounded-xl border border-white/10 group-hover:border-accent/50 transition-all duration-300 shadow-inner">
+            <div className="w-10 h-10 flex items-center justify-center bg-white/5 rounded-sm border border-white group-hover:border-accent/50 transition-all duration-300 shadow-inner">
               <img 
                 src={LogoImg} 
                 alt="PrimeFlow Logo" 

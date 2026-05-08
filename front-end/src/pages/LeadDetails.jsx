@@ -23,7 +23,7 @@ export default function LeadDetails() {
     const fetchLead = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:5000/api/leads/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/leads/${id}`)
         setLead(res.data);
         setOriginalLead(res.data);
       } catch (err) {
@@ -46,7 +46,7 @@ export default function LeadDetails() {
 
   const confirmSave = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/leads/${id}`, lead);
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/leads/${id}`, lead)
       setOriginalLead(lead);
       setIsEditing(false);
       setShowConfirm(false);

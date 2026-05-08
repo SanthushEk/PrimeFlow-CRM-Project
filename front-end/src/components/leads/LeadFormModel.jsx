@@ -55,7 +55,7 @@ export default function LeadFormModal({ isOpen, onClose, onSave }) {
         updatedAt: getSriLankaTime(),
       };
 
-      const res = await axios.post("http://localhost:5000/api/leads", payload);
+      axios.post(`${import.meta.env.VITE_API_URL}/api/leads`, payload);
 
       showPopup("success", "Lead created successfully!");
       onSave(res.data);

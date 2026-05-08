@@ -37,7 +37,7 @@ export default function LeadTable({
   const confirmDelete = async () => {
     try {
       setDeleting(true);
-      await axios.delete(`http://localhost:5000/api/leads/${selectedId}`);
+      axios.delete(`${import.meta.env.VITE_API_URL}/api/leads/${selectedId}`);
       onDelete(selectedId);
       setDeleteModal(false);
       setSelectedId(null);
@@ -105,7 +105,7 @@ export default function LeadTable({
 
                 <td className="p-4">
                   <div className="flex justify-center gap-3">
-                    <button 
+                    <button
                       onClick={() => navigate(`/leads/${lead.id}`)}
                       className="p-1 hover:text-blue-600 transition-colors"
                       title="View Details"

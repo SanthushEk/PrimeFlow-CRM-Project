@@ -46,9 +46,7 @@ export default function LeadNotesPage() {
     try {
       console.log("📥 Fetching notes...");
 
-      const res = await axios.get(
-        `http://localhost:5000/api/leads/${id}/notes`
-      );
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/leads/${id}/notes`);
 
       console.log("✅ Notes loaded:", res.data);
 
@@ -90,9 +88,7 @@ export default function LeadNotesPage() {
 
       console.log("🚨 Deleting note:", selectedNote);
 
-      await axios.delete(
-        `http://localhost:5000/api/notes/${selectedNote.id}`
-      );
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/notes/${selectedNote.id}`);
 
       console.log("✅ Note deleted successfully");
 

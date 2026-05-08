@@ -42,13 +42,13 @@ export default function NewNote({
       };
 
       const res = await axios.post(
-        `http://localhost:5000/api/leads/${leadId}/notes`,
+        `${import.meta.env.VITE_API_URL}/api/leads/${leadId}/notes`,
         payload
       );
 
       onSuccess(res.data);
       showNotification("Note added successfully!", "success");
-      
+
       // Reset and close
       setTitle("");
       setContent("");
@@ -72,10 +72,10 @@ export default function NewNote({
 
       {/* BACKDROP */}
       <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-[2px] flex items-center justify-center z-50 p-4">
-        
+
         {/* MODAL CONTAINER */}
         <div className="bg-white w-full max-w-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)] border-2 border-slate-200 overflow-hidden">
-          
+
           {/* ACCENT TOP BAR */}
           <div className="h-2 bg-primary w-full" />
 
@@ -88,7 +88,7 @@ export default function NewNote({
                 </h2>
                 <p className="text-xs font-bold text-slate-400 mt-1">LEAD REF: {leadId}</p>
               </div>
-              <button 
+              <button
                 onClick={handleCancel}
                 className="p-2 hover:bg-slate-100 rounded-none text-slate-400 hover:text-primary transition-colors border border-transparent hover:border-slate-200"
               >

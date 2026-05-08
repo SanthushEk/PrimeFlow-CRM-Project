@@ -25,7 +25,10 @@ export default function Login() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        { email, password }
+      );
       localStorage.setItem("token", res.data.token);
       window.location.href = "/dashboard";
     } catch (err) {
@@ -43,7 +46,7 @@ export default function Login() {
       {/* 🔐 RIGHT SIDE */}
       <div className="w-full md:w-1/2 lg:w-1/3 flex items-center justify-center p-8">
         <div className="w-full max-w-sm">
-          
+
           <div className="mb-8">
             <h2 className="text-4xl font-extrabold text-gray-900 tracking-tight">PrimeFlow</h2>
             <p className="text-gray-500 mt-2">Welcome back! Please enter your details.</p>

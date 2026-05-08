@@ -13,7 +13,10 @@ const notesRoutes = require("./routes/notesRoutes");
 const app = express();
 
 /* ---------------- MIDDLEWARE ---------------- */
-app.use(cors());
+app.use(cors({
+  origin: "*"
+}));
+
 app.use(express.json());
 
 /* ---------------- HEALTH CHECK ---------------- */
@@ -29,8 +32,6 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/leads", leadRoutes);
 app.use("/api/revenue", revenueRoutes);
 app.use("/api/stats", leadStatsRoutes);
-
-// 🔥 NEW ROUTE REGISTERED
 app.use("/api", notesRoutes);
 
 /* ---------------- ERROR HANDLING ---------------- */
@@ -40,9 +41,5 @@ app.use((req, res) => {
   });
 });
 
-/* ---------------- SERVER START ---------------- */
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+/* ---------------- EXPORT FOR VERCEL ---------------- */
+module.exports = app;

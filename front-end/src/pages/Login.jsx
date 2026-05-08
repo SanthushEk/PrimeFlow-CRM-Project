@@ -6,7 +6,7 @@ import {
   IoEyeOutline,
   IoEyeOffOutline
 } from "react-icons/io5";
-import loginImage from "../assets/login.jpg";
+import loginImage from "../assets/login-image.jpg";
 
 export default function Login() {
   console.log("LOGIN UPDATED");

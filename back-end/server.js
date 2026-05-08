@@ -13,10 +13,7 @@ const notesRoutes = require("./routes/notesRoutes");
 const app = express();
 
 /* ---------------- MIDDLEWARE ---------------- */
-app.use(cors({
-  origin: "*"
-}));
-
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 /* ---------------- HEALTH CHECK ---------------- */
@@ -41,5 +38,9 @@ app.use((req, res) => {
   });
 });
 
-/* ---------------- EXPORT FOR VERCEL ---------------- */
-module.exports = app;
+/* ---------------- START SERVER (RENDER NEEDS THIS) ---------------- */
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});

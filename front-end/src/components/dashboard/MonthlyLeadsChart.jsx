@@ -20,7 +20,10 @@ export default function PrimaryBarChart() {
   useEffect(() => {
     const fetchRevenue = async () => {
       try {
-        axios.get(`${import.meta.env.VITE_API_URL}/api/revenue`);
+
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/revenue`
+        );
 
         setData(
           res.data.map((i) => ({
@@ -28,6 +31,7 @@ export default function PrimaryBarChart() {
             revenue: Number(i.revenue),
           }))
         );
+
       } catch (err) {
         console.error(err);
       } finally {

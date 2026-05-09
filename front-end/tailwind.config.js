@@ -3,8 +3,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#00172f", // Your deep navy brand color
-        accent: "#3b82f6",  // Modern Blue for highlights
+        primary: "#00172f", 
+        accent: "#3b82f6",  
       },
       fontFamily: {
         sans: ["Open Sans", "sans-serif"],

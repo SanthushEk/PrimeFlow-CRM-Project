@@ -49,7 +49,7 @@ function App() {
           }
         />
 
-        {/* ✅ FIXED: PROTECT NOTES PAGE */}
+        {/* ✅ PROTECT NOTES PAGE */}
         <Route
           path="/leads/:id/notes"
           element={

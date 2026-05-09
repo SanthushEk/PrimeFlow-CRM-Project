@@ -223,6 +223,12 @@ CREATE TABLE public.notes (
 * 🎨 Responsive UI Design
 
   ---
+
+    #⚠️ Limitations
+  
+Your CRM is mainly designed for small to medium-scale use, so it may face performance issues with large datasets due to lack of pagination and optimization. It has a basic authentication system without advanced role-based access control. Security is limited, with no rate limiting or strong input validation. The system also lacks real-time updates, advanced analytics, and automation features like lead scoring or notifications. Additionally, it uses a simple monolithic backend structure, has no file storage support, and may not be fully optimized for production deployment.
+
+  ---
 #🧠 Short Reflection
 
 * This project was developed as part of an internship assessment

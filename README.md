@@ -1,47 +1,33 @@
-🚀 PrimeFlow CRM
+PrimeFlow CRM
 
+PrimeFlow CRM is a full-stack lead management web application developed for small sales teams to manage customer leads, track sales progress, update lead statuses, and improve workflow efficiency through a centralized dashboard system.
 
+📌 What is PrimeFlow CRM?
 
+PrimeFlow CRM is a modern CRM (Customer Relationship Management) system designed to help sales teams:
 
-
-
-
-
-
-
-
-
-📌 Overview
-
-PrimeFlow CRM is a full-stack lead management system designed for small sales teams to efficiently manage customer leads, track sales progress, and visualize performance through a centralized dashboard.
-
-It provides a modern workflow for handling leads, notes, and sales analytics in a clean and responsive UI.
-
-🎯 Key Features
-🔐 JWT Authentication (Login/Register)
-📋 Lead Management (Create, Read, Update, Delete)
-📝 Activity Notes Tracking
-📊 Sales Analytics Dashboard
-🔍 Lead Status Filtering
-⚡ Real-time API Integration
-☁️ PostgreSQL Cloud Database (NeonDB)
-🎨 Responsive UI with React + Vite
-🧰 Tech Stack
-Frontend	Backend	Database	Auth
-React + Vite	Node.js + Express	PostgreSQL (NeonDB)	JWT
-📸 Screenshots
-🔐 Login Page
-
-📊 Dashboard
-
-📋 Leads Management
-
-📝 Notes Section
-
-⚙️ Setup Instructions
-1️⃣ Clone Repository
+Manage customer leads efficiently
+Track sales pipeline progress
+Store and organize activity notes
+Monitor sales performance through dashboards
+Improve workflow and communication
+🎯 Objective of the Project
+Manage customer leads
+Track lead statuses
+Monitor sales performance
+Store activity notes
+Improve workflow efficiency
+Visualize business analytics through charts and KPI metrics
+⚙️ Tech Stack
+Frontend: React + Vite
+Backend: Node.js / Express
+Database: PostgreSQL (NeonDB)
+Authentication: JWT
+Deployment: Railway
+📥 Setup Instructions
+1️⃣ Clone the Repository
 git clone https://github.com/SanthushEk/PrimeFlow-CRM-Project.git
-2️⃣ Move into Project
+2️⃣ Move into Project Directory
 cd primeFlow-CRM-Project
 3️⃣ Install Frontend Dependencies
 cd front-end
@@ -51,44 +37,50 @@ cd ../back-end
 npm install
 5️⃣ Backend Environment Setup
 
-Create .env file inside back-end:
+Inside the back-end folder, create a .env file and add:
 
 DATABASE_URL=postgresql://neondb_owner:npg_p6hyHxBdel4u@ep-fancy-shape-ao4btc0c-pooler.c-2.ap-southeast-1.aws.neon.tech/PrimeFlow?sslmode=require&channel_binding=require
 JWT_SECRET=mysecretkey
 PORT=5000
-▶️ Run Backend
+▶️ Start Backend Server
 npm run dev
 6️⃣ Frontend Environment Setup
 
-Create .env file inside front-end:
+Inside the front-end folder, create a .env file and add:
 
 VITE_API_URL=https://amused-consideration-production-762d.up.railway.app
-▶️ Run Frontend
+▶️ Start Frontend
 npm run dev
 🔐 Test Login Credentials
 Email: test@example.com
 Password: 123456
-🗄️ Database Information
-PostgreSQL (NeonDB Cloud)
-Auto schema integration via backend
-No manual DB setup required
+
+(Update this if your backend uses different seed users)
+
+🗄️ Database Setup Instructions
+Database: PostgreSQL (NeonDB)
+No manual setup required (cloud database already configured)
+Ensure .env contains correct DATABASE_URL
+Run backend → tables will be created automatically (if using migrations/ORM)
+📊 Features
+🔐 JWT Authentication (Login/Register)
+📋 Lead Management System (CRUD)
+📈 Sales Analytics Dashboard
+📝 Activity Notes Tracking
+🔍 Lead Status Filtering
+☁️ PostgreSQL Cloud Database Integration
+⚡ REST API Backend
+🎨 Modern Responsive UI
+🧠 Short Reflection
+
+This project was developed as part of an internship assessment to demonstrate full-stack development skills. It helped strengthen my understanding of React frontend architecture, Node.js backend API development, authentication using JWT, and PostgreSQL database integration. I also gained experience in building real-world CRM workflows, debugging full-stack systems, and deploying applications using cloud services like Railway and NeonDB.
+
 🎥 Demo Video
 
-👉 https://your-demo-link-here.com
-
-📈 Project Highlights
-Real-world CRM workflow implementation
-Full-stack integration (React + Node.js)
-Cloud database integration (NeonDB)
-Production-ready REST API structure
-Clean UI/UX design
-Internship-level professional project
-🧠 Reflection
-
-This project helped me strengthen full-stack development skills including React frontend architecture, Node.js API development, JWT authentication, PostgreSQL integration, and deployment workflows. It also improved my understanding of real-world CRM systems and scalable application structure.
+👉 Watch Demo Video
 
 👨‍💻 Author
 
 Santhush Ekanayake
-Full-Stack Developer | Intern Software Engineer
-React | Node.js | PostgreSQL | AWS
+Intern Software Engineer
+Full-Stack Developer (React | Node.js | PostgreSQL)

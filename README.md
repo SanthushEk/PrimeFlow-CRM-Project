@@ -1,86 +1,171 @@
-PrimeFlow CRM
+# 🚀 PrimeFlow CRM
 
-PrimeFlow CRM is a full-stack lead management web application developed for small sales teams to manage customer leads, track sales progress, update lead statuses, and improve workflow efficiency through a centralized dashboard system.
+PrimeFlow CRM is a full-stack lead management web application designed for small sales teams to manage customer leads, track sales progress, update lead statuses, and improve workflow efficiency using a centralized dashboard system.
 
-📌 What is PrimeFlow CRM?
+---
+# 📌 What is PrimeFlow CRM?
 
-PrimeFlow CRM is a modern CRM (Customer Relationship Management) system designed to help sales teams:
+PrimeFlow CRM is a modern Customer Relationship Management (CRM) system that helps sales teams to:
 
-Manage customer leads efficiently
-Track sales pipeline progress
-Store and organize activity notes
-Monitor sales performance through dashboards
-Improve workflow and communication
-🎯 Objective of the Project
-Manage customer leads
-Track lead statuses
-Monitor sales performance
-Store activity notes
-Improve workflow efficiency
-Visualize business analytics through charts and KPI metrics
-⚙️ Tech Stack
-Frontend: React + Vite
-Backend: Node.js / Express
-Database: PostgreSQL (NeonDB)
-Authentication: JWT
-Deployment: Railway
-📥 Setup Instructions
-1️⃣ Clone the Repository
+* Manage customer leads efficiently
+* Track sales pipeline progress
+* Store and organize activity notes
+* Monitor sales performance using dashboards
+* Improve communication and workflow
+
+The system focuses on real-world CRM workflows, clean architecture, and scalable full-stack desig
+
+---
+
+# 🎯 Objective of the Project
+
+ * Manage customer leads
+ * Track lead statuses
+ * Monitor sales performance
+ * Store activity notes
+ * Improve workflow efficiency
+ * Visualize business analytics using charts & KPI metrics
+
+---
+# ⚙️ Tech Stack
+
+* Frontend: React + Vite , TailwindCSS
+* Backend: Node.js + Express
+* 8Database: PostgreSQL (NeonDB)
+* 8Authentication: JWT
+* Deployment: Back-end: Railway, Front-end: vercel
+
+---
+
+#  📥 Setup Instructions (Step-by-Step)
+
+Follow these steps to run the project on your local machine.
+
+### 1️⃣ Install Prerequisites
+
+* **Node.js**
+* **npm**
+* **Git (optional)**
+
+Check installation:
+
+```
+node -v
+npm -v
+```
+
+---
+
+### 2️⃣ Clone the Repository
+
+```
 git clone https://github.com/SanthushEk/PrimeFlow-CRM-Project.git
-2️⃣ Move into Project Directory
+```
+
+### 3️⃣ Navigate to Project Folder
+
+```
 cd primeFlow-CRM-Project
-3️⃣ Install Frontend Dependencies
+```
+
+---
+
+### 4️⃣ Redrect to Front-End Folder & Install Dependencies
+
+```
 cd front-end
 npm install
-4️⃣ Install Backend Dependencies
-cd ../back-end
+
+```
+
+---
+
+### 5️⃣ Redrect to Back-End Folder & Install Dependencies
+
+```
+cd back-end
 npm install
-5️⃣ Backend Environment Setup
 
-Inside the back-end folder, create a .env file and add:
+```
 
-DATABASE_URL=postgresql://neondb_owner:npg_p6hyHxBdel4u@ep-fancy-shape-ao4btc0c-pooler.c-2.ap-southeast-1.aws.neon.tech/PrimeFlow?sslmode=require&channel_binding=require
+---
+
+### 6️⃣ Back_End Folder add .env file and Past
+
+```
+
+DATABASE_URL=NenoDB URl Past Here
 JWT_SECRET=mysecretkey
 PORT=5000
-▶️ Start Backend Server
-npm run dev
-6️⃣ Frontend Environment Setup
 
-Inside the front-end folder, create a .env file and add:
+```
+```
 
-VITE_API_URL=https://amused-consideration-production-762d.up.railway.app
-▶️ Start Frontend
 npm run dev
+
+```
+
+---
+
+### 7. Front_End Folder add .env file and Past
+
+```
+
+VITE_API_URL=BackEnd Railway deply URL
+
+```
+```
+
+npm run dev
+
+```
+
+---
+
+#  📥 Setup Instructions (Step-by-Step)
+
 🔐 Test Login Credentials
-Email: test@example.com
-Password: 123456
 
-(Update this if your backend uses different seed users)
+* Email: test@example.com
+* Password: 123456
 
-🗄️ Database Setup Instructions
-Database: PostgreSQL (NeonDB)
-No manual setup required (cloud database already configured)
-Ensure .env contains correct DATABASE_URL
-Run backend → tables will be created automatically (if using migrations/ORM)
-📊 Features
-🔐 JWT Authentication (Login/Register)
-📋 Lead Management System (CRUD)
-📈 Sales Analytics Dashboard
-📝 Activity Notes Tracking
-🔍 Lead Status Filtering
-☁️ PostgreSQL Cloud Database Integration
-⚡ REST API Backend
-🎨 Modern Responsive UI
-🧠 Short Reflection
+ ---
 
-This project was developed as part of an internship assessment to demonstrate full-stack development skills. It helped strengthen my understanding of React frontend architecture, Node.js backend API development, authentication using JWT, and PostgreSQL database integration. I also gained experience in building real-world CRM workflows, debugging full-stack systems, and deploying applications using cloud services like Railway and NeonDB.
+ # 🗄️ Database Setup Instructions
 
-🎥 Demo Video
+* Database type: PostgreSQL (NeonDB Cloud)
+* No manual setup required
+* Ensure .env file has correct DATABASE_URL
+* Backend will automatically handle tables (if configured with ORM/migrations)
 
-👉 Watch Demo Video
+  ---
 
-👨‍💻 Author
+  #📊 Features
+  
+* 🔐 JWT Authentication (Login/Register)
+* 📋 Lead Management (CRUD operations)
+* 📈 Sales Analytics Dashboard
+* 📝 Activity Notes System
+* 🔍 Lead Filtering by Status
+* ☁️ PostgreSQL Cloud Integration
+* ⚡ REST API Backend
+* 🎨 Responsive UI Design
 
-Santhush Ekanayake
-Intern Software Engineer
-Full-Stack Developer (React | Node.js | PostgreSQL)
+  ---
+#🧠 Short Reflection
+
+* This project was developed as part of an internship assessment
+* It improved my full-stack development skills using React, Node.js, and PostgreSQL
+* I learned how to build authentication systems using JWT
+* I gained experience in designing real-world CRM workflows
+* I also improved deployment skills using Railway,Vercel and cloud databases
+
+  ---
+
+  #👨‍💻 Author
+
+* Name: Santhush Ekanayake
+* Role: Intern Software Engineer
+* Stack: React | Node.js | PostgreSQL
+  
+

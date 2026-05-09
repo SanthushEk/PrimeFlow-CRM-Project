@@ -111,7 +111,7 @@ npm run dev
 
 ```
 
-VITE_API_URL=BackEnd Railway deply URL
+VITE_API_URL=BackEnd Railway deploy URL
 
 ```
 ```
@@ -126,17 +126,88 @@ npm run dev
 
 🔐 Test Login Credentials
 
-* Email: test@example.com
-* Password: 123456
+* Email: admin@example.com
+* Password: password123
 
  ---
 
  # 🗄️ Database Setup Instructions
 
-* Database type: PostgreSQL (NeonDB Cloud)
-* No manual setup required
-* Ensure .env file has correct DATABASE_URL
-* Backend will automatically handle tables (if configured with ORM/migrations)
+#### 🗄️ 1. Create Database (Optional in Neon)
+
+```
+
+CREATE DATABASE "PrimeFlow";
+
+```
+
+---
+
+#### 📋 2. Leads Table
+
+```
+
+CREATE TABLE public.leads (
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    company TEXT,
+    email TEXT,
+    phone TEXT,
+    source TEXT,
+    assigned TEXT,
+    status TEXT,
+    value NUMERIC,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+```
+
+---
+
+#### 📊 3. Notes Table
+
+```
+
+CREATE TABLE public.notes (
+    id SERIAL PRIMARY KEY,
+    lead_id INTEGER NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_by VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_lead
+        FOREIGN KEY (lead_id)
+        REFERENCES public.leads (id)
+        ON DELETE CASCADE
+);
+
+```
+
+---
+
+#### 📊 3. Notes Table
+
+```
+
+CREATE TABLE public.notes (
+    id SERIAL PRIMARY KEY,
+    lead_id INTEGER NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_by VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_lead
+        FOREIGN KEY (lead_id)
+        REFERENCES public.leads (id)
+        ON DELETE CASCADE
+);
+
+```
+
+---
 
   ---
 

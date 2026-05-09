@@ -232,6 +232,8 @@ CREATE TABLE public.notes (
 * I also improved deployment skills using Railway,Vercel and cloud databases
 
   ---
+  Demo: https://drive.google.com/file/d/1SP2uqAVqlnPVAzCCg6_4RWXWvjdg4L0F/view?usp=sharing
+  ---
 
   #👨‍💻 Author
 

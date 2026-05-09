@@ -94,7 +94,7 @@ npm install
 
 ```
 
-DATABASE_URL=NenoDB URl Past Here
+DATABASE_URL=postgresql://neondb_owner:npg_p6hyHxBdel4u@ep-fancy-shape-ao4btc0c-pooler.c-2.ap-southeast-1.aws.neon.tech/PrimeFlow?sslmode=require&channel_binding=require
 JWT_SECRET=mysecretkey
 PORT=5000
 
@@ -111,7 +111,7 @@ npm run dev
 
 ```
 
-VITE_API_URL=BackEnd Railway deploy URL
+VITE_API_URL=https://amused-consideration-production-762d.up.railway.app
 
 ```
 ```

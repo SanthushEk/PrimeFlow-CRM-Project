@@ -164,27 +164,6 @@ CREATE TABLE public.leads (
 ```
 
 ---
-
-#### 📊 3. Notes Table
-
-```
-
-CREATE TABLE public.notes (
-    id SERIAL PRIMARY KEY,
-    lead_id INTEGER NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    content TEXT NOT NULL,
-    created_by VARCHAR(100),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT fk_lead
-        FOREIGN KEY (lead_id)
-        REFERENCES public.leads (id)
-        ON DELETE CASCADE
-);
-
-```
-
 ---
 
 #### 📊 3. Notes Table
